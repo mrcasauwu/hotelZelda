@@ -1,0 +1,81 @@
+const formulario = document.getElementById("formularioReserva");
+
+formulario.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const nombre = document.getElementById("nombre").value;
+    const entrada = document.getElementById("entrada").value;
+    const salida = document.getElementById("salida").value;
+    const huespedes = document.getElementById("huespedes").value;
+    const habitacion = document.getElementById("habitacion").value;
+
+
+    if (salida <= entrada) {
+
+        alert("La fecha de salida debe ser posterior a la fecha de entrada.");
+
+        return;
+    }
+
+
+    let precio;
+
+    if (habitacion === "sencilla") {
+        precio = 45;
+    }
+
+    else if (habitacion === "doble") {
+        precio = 65;
+    }
+
+    else {
+        precio = 100;
+    }
+
+
+    const fechaEntrada = new Date(entrada);
+    const fechaSalida = new Date(salida);
+
+    const diferencia =
+        fechaSalida - fechaEntrada;
+
+    const noches =
+        Math.ceil(
+            diferencia /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    const total = noches * precio;
+
+
+    alert(
+        "¡Reserva registrada! 🏨\n\n" +
+        "Huésped: " + nombre + "\n" +
+        "Entrada: " + entrada + "\n" +
+        "Salida: " + salida + "\n" +
+        "Huéspedes: " + huespedes + "\n" +
+        "Noches: " + noches + "\n" +
+        "Total: $" + total
+    );
+
+});.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.logo span {
+    color: #d4af37;
+}
